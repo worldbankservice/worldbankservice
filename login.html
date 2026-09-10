@@ -124,3 +124,36 @@
 
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://bmdhwwikftpzqbwhykt e.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = sb_publishable_oMkLe-Syr65BTmRxugKGxQ_e-pvF9W1
+
+  const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  document.querySelector(".login-button").addEventListener("click", async () => {
+    const email = document.getElementById("account").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+      alert("Account এবং Password দিন");
+      return;
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      alert("Login failed: " + error.message);
+      return;
+    }
+
+    alert("Login successful!");
+  });
+</script>
