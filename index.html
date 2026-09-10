@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Wallet</title>
+  <title>My Wallet Demo</title>
 
   <style>
     * {
@@ -14,295 +14,102 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: #0d0a2b;
-      color: #ffffff;
+      background: #eef2f7;
+      color: #222;
       min-height: 100vh;
-      padding-bottom: 110px;
     }
 
-    .app {
+    .container {
       max-width: 700px;
       margin: auto;
-      padding: 22px 26px;
+      padding: 25px 18px;
     }
 
-    /* Header */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 35px;
+      margin-bottom: 25px;
     }
 
     .brand {
-      font-size: 25px;
-      font-weight: 800;
-      color: #4c67ff;
+      font-size: 28px;
+      font-weight: bold;
     }
 
-    .header-icons {
-      display: flex;
-      gap: 14px;
-      align-items: center;
+    .status {
+      background: #dff7e7;
+      color: #16803c;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
     }
 
-    .icon-btn {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #292341;
-      font-size: 23px;
-      position: relative;
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
-    .notification-dot {
-      position: absolute;
-      width: 9px;
-      height: 9px;
-      background: #ff1744;
-      border-radius: 50%;
-      top: 10px;
-      right: 10px;
-    }
-
-    /* Account Card */
-    .account-card {
-      border: 2px solid #5548ff;
-      border-radius: 38px;
-      padding: 30px;
-      background: linear-gradient(145deg, #181435, #15132d);
-      box-shadow: 0 15px 45px rgba(69, 49, 255, 0.22);
-      margin-bottom: 65px;
-    }
-
-    .profile-row {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .avatar {
-      width: 82px;
-      height: 82px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #7447ff, #20c9ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 35px;
-      flex-shrink: 0;
-    }
-
-    .user-info {
-      flex: 1;
-    }
-
-    .user-info h2 {
-      font-size: 22px;
+    .name {
+      font-size: 24px;
+      font-weight: bold;
       margin-bottom: 8px;
     }
 
-    .user-info p {
-      color: #8f89ad;
-      margin: 5px 0;
-      font-size: 14px;
-    }
-
-    .member {
-      background: #32215f;
-      color: #a989ff;
-      padding: 10px 15px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: bold;
+    .info {
+      color: #666;
+      line-height: 1.7;
     }
 
     .balance {
-      margin-top: 28px;
-      background: #202039;
-      border: 1px solid #3b3953;
-      border-radius: 25px;
-      padding: 27px;
+      margin-top: 20px;
+      background: #f4f7fb;
+      border-radius: 14px;
+      padding: 20px;
     }
 
     .balance-title {
-      color: #9994b4;
+      color: #666;
       font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .amount {
+      font-size: 34px;
       font-weight: bold;
-      margin-bottom: 15px;
     }
 
-    .balance-value {
-      font-size: 38px;
-      font-weight: 800;
-    }
-
-    /* Action Grid */
     .actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 12px;
     }
 
     .action {
-      min-height: 105px;
-      border-radius: 25px;
-      padding: 18px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      font-size: 17px;
+      border: 0;
+      background: #f4f6f9;
+      padding: 18px 10px;
+      border-radius: 12px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      border: none;
-      color: white;
-      transition: transform 0.15s;
     }
 
-    .action:active {
-      transform: scale(0.97);
+    .action:hover {
+      background: #e7ebf1;
     }
 
-    .action-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.17);
-      font-size: 27px;
-      flex-shrink: 0;
-    }
-
-    .purple {
-      background: linear-gradient(135deg, #6e22ff, #7141ff);
-      box-shadow: 0 12px 25px rgba(104, 49, 255, 0.3);
-    }
-
-    .pink {
-      background: linear-gradient(135deg, #ff174f, #ed0074);
-      box-shadow: 0 12px 25px rgba(255, 20, 90, 0.25);
-    }
-
-    .green {
-      background: linear-gradient(135deg, #00b887, #08c99d);
-      box-shadow: 0 12px 25px rgba(0, 190, 140, 0.25);
-    }
-
-    .orange {
-      background: linear-gradient(135deg, #ff9d00, #ff8500);
-      box-shadow: 0 12px 25px rgba(255, 145, 0, 0.25);
-    }
-
-    .blue {
-      background: linear-gradient(135deg, #078cf0, #146cff);
-      box-shadow: 0 12px 25px rgba(0, 125, 255, 0.25);
-    }
-
-    .cyan {
-      background: linear-gradient(135deg, #13a6ed, #159ce7);
-      box-shadow: 0 12px 25px rgba(0, 160, 235, 0.25);
-    }
-
-    /* Bottom Navigation */
-    .bottom-nav {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      width: calc(100% - 54px);
-      max-width: 650px;
-      height: 78px;
-      background: rgba(31, 27, 55, 0.97);
-      border: 1px solid #39344f;
-      border-radius: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      z-index: 10;
-    }
-
-    .nav-item {
-      font-size: 25px;
-      color: #77748e;
-    }
-
-    .nav-item.active {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #6739ff;
-      color: white;
-      box-shadow: 0 8px 25px rgba(103, 57, 255, 0.45);
-    }
-
-    .qr {
-      width: 67px;
-      height: 67px;
-      border-radius: 50%;
-      background: #ff8500;
-      border: 5px solid #17132f;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      margin-top: -35px;
-      box-shadow: 0 8px 25px rgba(255, 130, 0, 0.45);
-    }
-
-    @media (max-width: 520px) {
-      .app {
-        padding: 20px 26px;
-      }
-
-      .account-card {
-        padding: 26px 20px;
-        border-radius: 32px;
-      }
-
-      .user-info h2 {
-        font-size: 19px;
-      }
-
-      .member {
-        display: none;
-      }
-
-      .avatar {
-        width: 70px;
-        height: 70px;
-      }
-
-      .balance-value {
-        font-size: 32px;
-      }
-
-      .actions {
-        gap: 16px;
-      }
-
-      .action {
-        min-height: 100px;
-        padding: 14px;
-        gap: 10px;
-        font-size: 15px;
-      }
-
-      .action-icon {
-        width: 50px;
-        height: 50px;
+    @media (max-width: 500px) {
+      .brand {
         font-size: 23px;
       }
 
-      .bottom-nav {
-        width: calc(100% - 40px);
+      .amount {
+        font-size: 28px;
       }
     }
   </style>
@@ -310,94 +117,68 @@
 
 <body>
 
-  <div class="app">
+  <div class="container">
 
     <div class="header">
       <div class="brand">My Wallet</div>
-
-      <div class="header-icons">
-        <div class="icon-btn">
-          🔔
-          <span class="notification-dot"></span>
-        </div>
-
-        <div class="icon-btn">👤</div>
-      </div>
+      <div class="status">ACTIVE</div>
     </div>
 
-    <div class="account-card">
+    <div class="card">
 
-      <div class="profile-row">
+      <div class="name">Demo User</div>
 
-        <div class="avatar">👤</div>
-
-        <div class="user-info">
-          <h2>SM SOHEL RANA</h2>
-          <p>📱 017+++++++++</p>
-          <p>Account: DEMO-00001</p>
-          <p>Status: ACTIVE</p>
-        </div>
-
-        <div class="member">MEMBER</div>
-
+      <div class="info">
+        Phone: 01700000000<br>
+        Account: DEMO-00001<br>
+        Member: Active
       </div>
 
       <div class="balance">
-        <div class="balance-title">AVAILABLE BALANCE</div>
-        <div class="balance-value">৳5,000,000</div>
+        <div class="balance-title">
+          AVAILABLE BALANCE
+        </div>
+
+        <div class="amount">
+          ৳5,000
+        </div>
       </div>
 
     </div>
 
-    <div class="actions">
+    <div class="card">
 
-      <button class="action purple">
-        <span class="action-icon">🏦</span>
-        <span>Bank Transfer</span>
-      </button>
+      <div class="actions">
 
-      <button class="action pink">
-        <span class="action-icon">➤</span>
-        <span>Send Money</span>
-      </button>
+        <button class="action">
+          Bank Transfer
+        </button>
 
-      <button class="action green">
-        <span class="action-icon">💵</span>
-        <span>Cash Out</span>
-      </button>
+        <button class="action">
+          Send Money
+        </button>
 
-      <button class="action orange">
-        <span class="action-icon">↓</span>
-        <span>Withdraw</span>
-      </button>
+        <button class="action">
+          Cash Out
+        </button>
 
-      <button class="action blue">
-        <span class="action-icon">📄</span>
-        <span>Statements</span>
-      </button>
+        <button class="action">
+          Withdraw
+        </button>
 
-      <button class="action cyan">
-        <span class="action-icon">↑</span>
-        <span>Deposit</span>
-      </button>
+        <button class="action">
+          Statements
+        </button>
+
+        <button class="action">
+          Deposit
+        </button>
+
+      </div>
 
     </div>
-
-  </div>
-
-  <div class="bottom-nav">
-
-    <div class="nav-item active">⌂</div>
-
-    <div class="nav-item">▦</div>
-
-    <div class="qr">▦</div>
-
-    <div class="nav-item">💬</div>
-
-    <div class="nav-item">⏻</div>
 
   </div>
 
 </body>
-      </html>
+</html>
